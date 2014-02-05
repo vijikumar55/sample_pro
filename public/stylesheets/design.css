@@ -1,0 +1,64 @@
+tr.tablehead
+{
+ vertical-align: middle;
+ background-color : #01DF01;   }
+ 
+ 	tr.addedrow
+{
+ vertical-align: middle;
+ background-color : #82A4F9;   }
+ 
+ tr.tablerow {
+   background-color:#E6F2FF;
+   border:1px solid #C5DBF7;
+   height:20px;
+   font-size:1em;
+   padding-left:10px;
+   empty-cells:show;
+   }
+   
+  body {
+margin:0px auto;
+}
+.ajax-scaffold form,
+.ajax-scaffold table,
+.ajax-scaffold p,
+.ajax-scaffold div,
+.ajax-scaffold fieldset {
+margin: 0;
+padding: 0;
+}
+
+.title{
+	color : blue;
+	text-align: center;
+	font-family: Times;
+	font-size: 30px;
+	text-decoration: blink;
+	text-transform: uppercase;
+}
+
+body 
+{
+	background-color:#ffffff; 
+	background-image: url('/images/background.jpg');
+	background-repeat:no-repeat;
+	background-size: 500px 500px;
+	background-position: right;
+	
+	}
+	
+	.tablecss 
+	{
+		border: 2px solid black;
+		width: 100%;
+		background-color: #C5DBF7;
+	}
+
+.login_form{
+	float:right; 
+position:relative; 
+right:10em; 
+text-align:right; 
+top:30em; 
+width:250px;}

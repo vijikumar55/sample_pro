@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<h1>VIJI BOOK!</h1>
+<table>
+	<tr>
+		<td>
+			<%="You Are ..."%> <b style="color: green"><%=User.find(session[:user_id]).name%></b>
+		</td>
+			<%a=!User.find(session[:user_id]).avathar.to_s.nil? ? User.find(session[:user_id]).avathar.to_s : "/images/empty_user.png"%>
+			<td><%= image_tag(a ,:alt => "home image", :width => 50, :height => 50, :title => "Click here to return to Home") %></td>
+			<td width="905px"></td>
+			<td>
+			<img src="/images/a.png" alt="b" />
+		    </td>
+	</tr>
+</table>
+<table>
+	<tr>
+	<th>
+		User Name
+	</th>
+	</tr>
+	<br><br>
+	<div class="ui-widget">
+	<label for="tags">Tags: </label>
+	<input id="tags" />
+	</div>
+	<br><br><br><br>
+	<%@user.each do |u|%>
+	<tr></tr><tr></tr><tr></tr>
+	<tr>
+		<%if u.avathar.to_s%>
+		<td><%= image_tag(u.avathar.to_s ,:alt => "home image", :width => 50, :height => 50, :title => "Click here to return to Home") %></td>
+		<%else%>
+		<td><%=(image_tag("/images/empty_user.png", :alt => "home image", :width => 50, :height => 50, :title => "Click here to return to Home")) %></td>
+		<%end%>
+		<td>
+		<%= link_to u.name, controller: "chat", :id=>u.id %>
+		</td>
+		<%if ((Time.now - u.visited_at).round/60).to_f <= 10 %>
+		<td>
+			<%=image_tag "/images/green_dot_small.png"%>
+		</td>
+		<%else%>
+		<td>
+			<%=image_tag "/images/red.jpeg"%>
+		</td>
+		<%end%>
+	</tr>
+	<tr></tr><tr></tr><tr></tr>
+	<%end%>
+</table>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+ <script>
+$(document).ready(function(){
+	$('img').hover(function() {
+		 $(this).stop().animate({ width: '300px', height: '300px'});
+}, function() {
+    $(this).stop().animate({ width: '50px', height: '50px' });
+});
+});
+ $(function() {
+var availableTags = <%= raw @user.collect{|u|u.name.to_s}%>
+$( "#tags" ).autocomplete({
+source: availableTags
+});
+  });
+</script>

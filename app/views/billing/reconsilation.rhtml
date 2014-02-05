@@ -1,0 +1,18 @@
+<table>
+	<h1 class="title">Reconsilation</h1>
+	<%=form_tag :action=>'edit_reconsilation' do%>
+	<tr>
+		<td>
+			Select The Item Name:
+		</td>
+		<td>
+			<%=collection_select 'item','name',@items, 'id','name',{},html_options={:style=>'width:50%'}%>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="240px">
+	<%=submit_tag 'submit'%>
+	</td>
+	</tr>
+	<%end%>
+</table>

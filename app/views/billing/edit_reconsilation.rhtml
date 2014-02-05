@@ -1,0 +1,81 @@
+<h1 align="center">EDIT RECONSILATION</h1>
+<%=form_tag :action=>'save_reconsilation' do%>
+<table id="reconsi" class="tablecss" cellspacing="0" cellpadding="0" border="2">
+	<h2>New Batch</h2>
+	<tr>
+		<th>Batch Number</th>
+		<th>Expiry Date</th>
+		<th>Quantity</th>
+		<th>Cost Price</th>
+		<th>MRP</th>
+		<td><input value='Add Batch' class='buttons' type='button'  onclick=' return add_batch();' /></td>
+		<%=hidden_field 'item','id', :value=>@item.id%>
+	</tr>
+	<%for id in @item.item_details%>
+	<tr>
+		<script>
+		<%a=id.id%>
+		</script>
+		<td><%=id.batch_number.to_s%></td>
+		<%=hidden_field 'item_detail','id',:value=>id.id%>
+		<%=hidden_field 'original','quantity',:object=>id.stock_detail, :index=>id.id%>
+		<td><%=id.expiry_date%></td>
+		<td><%=text_field 'stock','quantity',:size=>4,:object=>id.stock_detail, :index=>id.id%></td>
+		<td><%=id.cost_price.to_f%></td>
+		<td><%=id.mrp.to_f%></td>
+		<td><input value='Update' class='buttons' type='button'  onclick=' return update_batch(<%=id.id%>);' /></td>
+	</tr>
+	<%end%>
+	</table>
+    <table>
+    </br></br></br>
+	<tr>
+		<td width="244px"></td>
+	<td><%=submit_tag "save"%></td>
+	</tr>
+	</table>
+	<%end%>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script>
+	var ind=1
+</script>
+<script>
+	function add_batch()
+	{
+		$.ajax({
+			url: "/billing/add_batch",
+			type: "get",
+			dataType: "html",
+			data: {"index": ind},
+			success: function(returnData){
+                     $("#reconsi").append(returnData);
+                    batch_det = $('input[name$="[batch_number]"]', returnData);
+                    var valArray = []
+                    batch_det.each(function () {
+    				a=valArray.push($(this).val())
+    				ind=ind + a
+					});
+                }
+		})
+	}
+	
+	function update_batch(id) 
+	{
+		var quantity=$("#stock_"+id+"_quantity").val()
+		var original_qty=$("#original_"+id+"_quantity").val()
+		if (parseFloat(quantity) != parseFloat(original_qty))
+		{
+		$.ajax({
+			url: "/billing/update_existing_stock",
+			type: "get",
+			dataType: "html",
+			data: {"detail_id" : id, "quantity" :quantity},
+			success: function (returnData){
+			  alert("Updated Successfully!!")
+			}
+		})
+		}
+	}
+	
+</script>

@@ -1,0 +1,12 @@
+<table>
+<tr>
+<td>Title</td>		
+<tr><td><%=text_field 'news','title' ,:size=>20%></td></tr>
+<td>Content</td>
+<tr><td><%=text_area 'news','content'%></td></tr>
+<td>image URL: </td>
+<tr><td><%= file_field 'news', 'image' %></td></tr>
+<td>Video URL: </td>
+<tr><td><%= file_field 'news', 'videos' %></td></tr>
+</tr>
+</table>

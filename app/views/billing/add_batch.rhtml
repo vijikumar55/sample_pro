@@ -1,0 +1,24 @@
+<tr>
+	<td>
+		<%=text_field 'item_details','batch_number',:size=>'6', :index=>@index%>
+	</td>
+	<td>
+		<%=text_field 'item_details','expiry_date',:size=>'6',:class=>"date_picker", :index=>@index%>
+	</td>
+	<td>
+		<%=text_field 'item_details','quantity',:size=>'3', :index=>@index%>
+	</td>
+	<td>
+		<%=text_field 'item_details','cost_price',:size=>'4', :index=>@index%>
+	</td>
+	<td>
+		<%=text_field 'item_details','mrp',:size=>'4', :index=>@index%>
+	</td>
+</tr>
+<script>
+$(function()
+{
+	$("input[id^='item_details'][id$='expiry_date']").datepicker();
+});
+</script>
+

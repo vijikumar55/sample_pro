@@ -1,0 +1,26 @@
+<table>
+	<tr>
+	<td>
+		<h1><b><%=@news.title%></b></h1>
+	</td>
+	</tr>
+	<%if @news.image.to_s%>
+	<tr>
+	<td>
+		</br></br></br>
+		<%= image_tag(@news.image.to_s ,:alt => "home image", :width => 400, :height => 400, :title => "Click here to return to Home") %>
+	</td>
+	</tr>
+	<%end%>	
+	<tr>
+		<%= video_player( {:file => '/BABA Scene 1.mp4'}, {:width => '100%'})%>
+	<td>
+		</br></br></br>
+		<%=@news.content%>
+	</td>
+	</tr>
+	</table>
+	<style rel="stylesheet" type="text/css" media="screen">
+    /* Stylesheet goes here */
+    </style>
+

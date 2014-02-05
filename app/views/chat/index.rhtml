@@ -1,0 +1,37 @@
+<h1>Welcome to the discussion world!!!</h1>
+<meta http-equiv="refresh" content="20" />
+<table id="chat_content">
+	<tr>
+	<th>User</th>
+	<th width='100px'></th>
+	<th>Chat content</th>
+	</tr>
+	<%@chats.each do |c|%>
+	<tr>
+	  <td><%= c.user_id && User.find(c.user_id) ? User.find(c.user_id).name : "Unknown"%></td><td width='100px'></td>
+	  <td><%=c.chat%></td>	
+	</tr>
+	<%end%>
+</table>
+<%=form_for :chat, :url=>{:action=>'create',:to=>@chatting_with.id},:html=>{:onChange=>"check()"} do |c|%>
+<%c.label :enter_your_comment%>
+<p><%=c.text_area :chat%></p>
+<p><%=c.hidden_field :user_id, :value=>session[:user_id].to_i%></p>
+<%= c.submit%>
+<%end%>
+
+<script>
+function check()
+{
+	if ($F('chat_chat')=='')
+	{
+		alert("please enter text")
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+	
+}
+</script>

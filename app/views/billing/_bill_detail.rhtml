@@ -1,0 +1,22 @@
+<% if from != "reload" %>
+<%index=index.to_i+1%>
+<tr class='addedrow'>
+<td>
+<%=item_details.item.item_code%>
+<%=hidden_field 'bill_details','item_code', 'index'=>index, :value=>item_details.item.item_code%>
+</td>
+<td>
+<%=item_details.item.name%>
+<%=hidden_field 'bill_details','narration', 'index'=>index, :value=>item_details.item.name%>
+</td>
+<td>
+	<%=collection_select 'item_details','batch_number',item_details.item.item_details.delete_if{|id|id.stock_detail.quantity <= 0.0}, 'id','batch_number',{},html_options={'index'=>index}%>
+</td>
+<td>
+<%=text_field 'bill_details','quantity',:size=>'2','index'=>index%>
+</td>
+<td>
+<%=text_field 'item_details','cost_price',:size=>'4','index'=>index%>
+</td>
+</tr>
+<%end%>

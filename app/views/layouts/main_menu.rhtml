@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta http-equiv="Content-Script-Type" content="text/javascript" />
+        <link href="/stylesheets/design.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+	 <table>
+	<tr>
+	<td>
+<div id="navcontainer" style="width: 300px;">
+<ul id="navlist" style="height: 1000px;width: 230px">
+<li><a href="#"><%= link_to "Reconsilation", controller: "billing", action: "reconsilation" %></a></li>	
+<li><a href="#" id="current"><%= link_to "Billing", controller: "billing",  action: "billing"%></a></li>
+<!--li><a href="#"><%= link_to "My Blog", controller: "posts" %></a></li-->
+<!--li><a href="#"><%= link_to "Chat", controller: "chat" %></a></li-->
+<li><a href="#"><%= link_to "Return Bill", controller: "billing", action: "search_for_return_bill" %></a></li>
+<li><a href="#"><%= link_to "Online Users", controller: "chat",  action: "online_users"%></a></li>
+<li><a href="#"><%= link_to "Items", controller: "item",  action: "new"%></a></li>
+<li><a href="#"><%= link_to "News", controller: "news",  action: "index"%></a></li>
+<li><a href="#"><%= link_to "Sign out",  controller: "/admins/session",  action: "destroy"%></a></li>
+</ul>
+</div>
+</td>
+<td style="float: left;margin-top: 3cm">
+<%= yield %>
+</td>
+</tr>
+</table>
+<style>
+#navlist
+{
+color: white;
+background: #17a;
+border-bottom: 0.2em solid #17a;
+border-right: 0.2em solid #17a;
+padding: 0 1px;
+margin-left: 0;
+width: 12em;
+font: normal 0.8em Verdana, sans-serif;
+}
+
+#navlist li
+{
+list-style: none;
+margin: 0;
+font-size: 1em;
+}
+
+#navlist a
+{
+display: block;
+text-decoration: none;
+margin-bottom: 0.5em;
+margin-top: 0.5em;
+color: white;
+background: #39c;
+border-width: 1px;
+border-style: solid;
+border-color: #5bd #035 #068 #6cf;
+border-left: 1em solid #fc0;
+padding: 0.25em 0.5em 0.4em 0.75em;
+}
+
+#navlist a#current { border-color: #5bd #035 #068 #f30; }
+
+#navlist a
+{
+width: 99%;
+/* only necessary for Internet Explorer */
+}
+
+#navlist a
+{
+voice-family: "\"}\"";
+voice-family: inherit;
+width: 9.6em;
+/* Tantek-hack should only used if Internet-Explorer 6 is in standards-compliant mode */
+}
+
+#navcontainer>#navlist a
+{
+width: auto;
+/* only necessary if you use the hacks above for the Internet Explorer */
+}
+
+#navlist a:hover, #navlist a#current:hover
+{
+background: #28b;
+border-color: #069 #6cf #5bd #fc0;
+padding: 0.4em 0.35em 0.25em 0.9em;
+}
+
+#navlist a:active, #navlist a#current:active
+{
+background: #17a;
+border-color: #069 #6cf #5bd white;
+padding: 0.4em 0.35em 0.25em 0.9em;
+}
+</style>

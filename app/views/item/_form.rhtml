@@ -1,0 +1,11 @@
+<table>
+<tr>
+<td>Item Name</td>		
+<td><%=text_field 'item','name' ,:size=>20%></td>
+</tr>
+<%=hidden_field 'h_item','id',:value=>@item ? @item.id : ""%>
+<tr>
+<td>Status</td>		
+<td><%=select 'item','status',['Active','InActive'] %></td>
+</tr>
+</table>

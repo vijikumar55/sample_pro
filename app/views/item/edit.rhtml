@@ -1,0 +1,6 @@
+<h1 class="title">Edit Items</h1>
+<%=form_tag :action=>'update' do%>
+<%= render :partial=>'form'%>
+<%=submit_tag "save", :locals=> {:item_id=>100}%>
+<%end%>
+

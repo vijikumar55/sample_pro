@@ -1,0 +1,13 @@
+
+
+<%=form_for :user, :url=>{:action=>'create'} ,:html => {:multipart => true} do |m|%>
+</br></br></br></br></br></br></br></br>
+<h1>Please Register Here</h1>
+</br></br>
+Name:<%=m.text_field :name%></br>
+Password:<%=m.password_field :password%></br>
+Mobile: <%=m.text_field :mobile%></br>
+image URL: <%= file_field 'upload', 'datafile' %></p>
+<%=m.submit%>
+<%end%>
+

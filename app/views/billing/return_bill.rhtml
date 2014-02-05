@@ -1,0 +1,28 @@
+<h1>Return Bill</h1>
+<%=form_tag :action=>'save_return_bill' do%>
+<%bill_details=@bill.bill_details%>
+<table>
+	<tr>
+		<th>Item Code</th>
+		<th>Item Name</th>
+		<th>Batch Number</th>
+		<th> Return Quantity</th>
+	</tr>
+<%for bd in bill_details%>
+<tr>
+<td><%=bd.item_detail.item.item_code%></td>	
+<%=hidden_field 'item','code', :value=>bd.item_detail.item.item_code, :index=>bd.id%>
+<td><%=bd.narration%></td>
+<td><%=bd.item_detail.batch_number%></td>
+<td><%=text_field 'bill_details','quantity',:object=>bd,:size=>2, :index=>bd.id%></td>
+</tr>
+<%end%>
+</table>
+</br></br></br>
+<table>
+	<tr>
+		<td width="200px"></td>
+<td align="center"><%=submit_tag "save"%></td>
+</tr>
+</table>
+<%end%>

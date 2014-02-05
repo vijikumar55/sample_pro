@@ -1,0 +1,27 @@
+ <%#= error_messages_for :user %>
+ <style>
+table.login_form{
+	float:right; 
+position:relative; 
+right:10em; 
+text-align:right; 
+top:30em; 
+width:250px;}
+</style>
+ <%form_tag :action=>'check' do%>
+ 	<%fields_for :user  do |f|%>
+ <table class="login_form" >
+ 	<marquee bgcolor='green' behavior="alternate"
+direction="right"
+loop="5"
+scrollamount="10"
+scrolldelay="40"
+width="100%">VIJI KUMAR</marquee>
+<tr><td>User Name:</td> <td><%=f.text_field :user_name%></br></td></tr>
+<tr><td>Pass Word:</td> <td> <%=f.password_field :pass_word%></br></td></tr>
+<tr><td></td><td><%=submit_tag "Enter"%></br></td></tr>
+<tr></br></br></br></br></br></tr>
+<td></td><td><%=link_to 'To Register Click Here', :action=>'register'%></td>
+</table>
+<%end%>
+<%end%>

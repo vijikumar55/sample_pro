@@ -1,0 +1,22 @@
+<table id="aaa" class="tablecss" cellspacing="0" cellpadding="0" border="2">
+	<h1 class="title"><%=@bill.extid%></h1>
+	<tr id="tablehead">
+		<th>Si.No</th>
+		<th>Item Name</th>
+		<th>Batch Number</th>
+		<th>Quantity</th>
+		<th>Cost Price</th>
+		<th>Total</th>
+	</tr>	
+	<%i=0%>
+	<%for bill_detail in @bill.bill_details%>
+	<tr>
+		<td><%=i=i+1%></td>
+		<td><%=bill_detail.narration%></td>
+		<td><%=bill_detail.item_detail.batch_number%></td>
+		<td><%=bill_detail.quantity%></td>
+		<td><%=bill_detail.item_detail.cost_price%></td>
+		<td><%=(bill_detail.quantity.to_f * bill_detail.item_detail.cost_price.to_f)%></td>
+	</tr>
+	<%end%>
+</table>

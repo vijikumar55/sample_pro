@@ -1,0 +1,13 @@
+<h1 class="title">NewS</h1>
+<%=link_to "Create New", :controller=>"news", :action=>"new"%>
+</br></br>
+<table>
+<%for news in @news%>
+<tr>
+	<td>
+		</br></br></br>
+		<%=link_to news.title, :action=>"view_news", :id=>news.id%>
+	</td>
+</tr>
+<%end%>
+</table>

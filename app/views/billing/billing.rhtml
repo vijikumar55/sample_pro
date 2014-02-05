@@ -1,0 +1,107 @@
+    <%=form_tag :action=>'save' do%>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<body>
+    	<h1 class="title">Billing</h1>
+	<tr><td><label for="tags">Items: </label></td>
+	<td><%=text_field 'item', 'names',:onChange=>'load_available_qty()'%></td>
+	<td><%=text_field 'item', 'qty',:class=>'size1',:size=>'1'%></td>
+	<td><input value='Add Item' class='buttons' type='button'  onclick=' return add_item();' /></td></tr></br><br>
+	<tr>
+		<td><label for="tags">Available Quantity: </label></td>
+		<td id="available_qty"><%=text_field 'item', 'available_qty',:class=>'size1',:size=>'1'%></td>
+	</tr>
+	</body>
+	</table>
+	<br><br><br><br>
+	<table id="aaa" class="tablecss" cellspacing="0" cellpadding="0" border="2">
+		<tr class="tablehead">
+			<td>Item Code</td>
+			<td>Item Name</td>
+			<td>Batch Number</td>
+			<td>Quantity</td>
+			<td>Cost Price</td>
+		</tr>
+		<%= render :partial => 'bill_detail', :locals => {:from => "reload"} %>
+	</table>
+	<br><br>
+	<table>
+	<tr><td>Total Bill Amount:</td><td><%= text_field 'bill','total_amount',:size=>'4'%></td></tr>
+	<tr></tr><tr></tr>
+	</table>
+	<br/><br/><br/><br/>
+	<table>
+		<tr><td width="200px"></td><td><%= submit_tag 'Cash'%></td></tr>
+	</table>
+	
+<%end%>
+ 	<script>
+ 		var ind=0
+ 		var grand_total=0
+ 	</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script>
+
+function load_available_qty()
+{
+	item_name=$("#item_names").val()
+	var pars = item_name;
+	$.ajax({
+                url: "/billing/load_quantity",
+                type: "get",
+                dataType: "html",
+                data: {"name" : pars},
+                success: function(returnData){
+                     $("#available_qty").replaceWith(returnData);
+                }
+            });
+	
+}
+function add_item()
+{   
+	item_name=$("#item_names").val()
+	avail_qty=$("#item_available_qty").val()
+	qty=$("#item_qty").val()
+	if (parseFloat(qty) > parseFloat(avail_qty))
+	{
+		alert("Please check the quantity!!!")
+		return false;
+	}
+	 if (item_name == '' || ind > 0 && jQuery.grep([1,ind],function(i){return ($("#bill_details_"+i+"_narration").val()==item_name)}).length > 0) {
+            alert("This item already added.");
+            return false;
+        }
+	var pars = item_name;
+	$.ajax({
+                url: "/billing/add_bill_detail",
+                type: "get",
+                dataType: "html",
+                data: {"name" : pars,"qty" : qty, "index" : ind},
+                success: function(returnData){
+                     $("#aaa").append(returnData);
+                     billDet = $('input[name$="[narration]"]', returnData);
+                     var valArray = []
+                    billDet.each(function () {
+    				a=valArray.push($(this).val())
+    				ind=ind + a
+    				calculate_total(ind)
+					});
+                }
+            });
+}
+$(function() {
+var availableTags = <%= raw @items.collect{|u|u.name.to_s}%>
+$( "#item_names" ).autocomplete({
+source: availableTags
+});
+});
+
+function calculate_total(i)
+{
+	var quantity=($("#bill_details_"+i+"_quantity").val())
+	var cost_price=($("#item_details_"+i+"_cost_price").val())
+	var total = parseFloat(quantity) * parseFloat(cost_price)
+	grand_total= grand_total + total
+	$("#bill_total_amount").val(parseFloat(parseFloat(grand_total)))
+}
+ </script>

@@ -1,0 +1,21 @@
+<%=form_tag :action=>'return_bill' do%>
+<table>
+	<h1 class="title">Select Bill</h1>
+	<tr>
+		<td>Select Bill</td>
+		<td><%=text_field 'bill', 'no',:size=>15%></td>
+	</tr>
+</table>
+<%=submit_tag "return"%>
+<%end%>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script>
+$(function() {
+var availableTags = <%= raw @bills.collect{|b|b.extid.to_s}%>
+$( "#bill_no" ).autocomplete({
+source: availableTags
+});
+});
+
+</script>

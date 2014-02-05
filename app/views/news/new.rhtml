@@ -1,0 +1,8 @@
+<h1 class="title">Create NewS</h1>
+</br></br>
+<%=form_for :news, :url=>{:action=>'save'},:html => {:multipart => true}  do |m|%>
+<%= render :partial=>'form'%>
+<%=submit_tag "save"%>
+<%end%>
+
+
