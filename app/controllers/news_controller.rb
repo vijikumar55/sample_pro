@@ -1,5 +1,5 @@
 class NewsController < ApplicationController
-#  layout 'main_menu'
+  layout 'main_menu'
   def index
     @news=News.where(["published_date=?",Date.today]).order("id desc").limit(10)
   end
@@ -11,6 +11,7 @@ class NewsController < ApplicationController
     params_for_news=params[:news].merge(:published_date=>Date.today, :author_name=>Admin.find(session[:user_id]).email)
     @news=News.new(params_for_news)
     status=@news.save!
+    redirect_to :action=>'view_news', :id=>@news.id
   end
   
   def view_news

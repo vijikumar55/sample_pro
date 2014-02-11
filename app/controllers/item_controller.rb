@@ -17,7 +17,6 @@ class ItemController < ApplicationController
   def list
     @page=params[:page].to_i
     @items=Item.order("name asc").page(@page)
-    render :layout=>false
   end
   
   def edit
